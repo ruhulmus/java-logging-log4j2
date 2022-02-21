@@ -1,5 +1,6 @@
 # Java logging with log4j2
 
+Apache Log4j 2, is the fastest Java logging framework and provides significant improvements.
 **Log4J2**  supports JSON,XML and YAML in addition to properties file configuration . Here I use XML file for the configuration.
 
 ### Add log4j Dependancy :
@@ -165,3 +166,15 @@ public class Error {
 
 }
 ```
+
+### Run The source Code
+```cmd
+$ git clone https://github.com/ruhulmus/java-logging-log4j2.git
+$ cd java-logging-log4j2
+$ mvn clean install
+$ java -Dlog4j2.contextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector -jar target/log4j2-1.0.0.jar
+```
+
+For more detials about apache log4j2 you can check this link.
+[https://logging.apache.org/log4j/2.x/
+](https://logging.apache.org/log4j/2.x/)
