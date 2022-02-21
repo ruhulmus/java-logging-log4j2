@@ -167,7 +167,7 @@ public class Error {
 }
 ```
 
-### Run The source Code
+### Source Code Run and Test
 ```cmd
 $ git clone https://github.com/ruhulmus/java-logging-log4j2.git
 $ cd java-logging-log4j2
