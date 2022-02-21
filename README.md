@@ -58,7 +58,7 @@ Add `maven` Plugin in  `pom.xml` file for Build:
 ```
 
 
-*Add configuration*
+###  log4j2.xml configuration
 
 Path : `src/resources/log4j2.xml`
 
@@ -69,7 +69,6 @@ Path : `src/resources/log4j2.xml`
         <Console name="LogToConsole" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
-
 
         <RollingFile name="LogToRollingFile" fileName="logs/app.log"
                      filePattern="logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
@@ -108,4 +107,61 @@ Path : `src/resources/log4j2.xml`
         </Root>
     </Loggers>
 </Configuration>
+```
+
+### Configure `Main.java` Class :
+Now create a logger class `Main.java` that uses the Log4J2 API to log the messages.
+
+```java
+package com.log4j2;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+public class Main {
+
+    private static final Logger logger = LogManager.getLogger(Main.class);
+
+    public static void main(String[] args) {
+
+        logger.debug("Log4j 2 hello");
+        // with Java 8, we can do this, no need to check the log level
+        while (true)//test rolling file
+            logger.debug("hello {}", () -> getValue());
+
+    }
+
+    static int getValue() {
+        return 5;
+    }
+
+}
+```
+
+### Configure `Error.java` Class :
+Create another logger class `Error.java` to create and check exceptions.
+```java
+package com.log4j2;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+public class Error {
+
+    private static final Logger logger = LogManager.getLogger(Error.class);
+
+    public static void main(String[] args) {
+
+        try {
+            System.out.println(getException());
+        } catch (IllegalArgumentException e) {
+            logger.error("{}", e);
+        }
+    }
+
+    static int getException() throws IllegalArgumentException {
+        throw new IllegalArgumentException("Hello Exception!");
+    }
+
+}
 ```
